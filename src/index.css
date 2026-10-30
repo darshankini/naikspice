@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+body { @apply bg-gray-100 text-gray-800; }
+
+/* ---- Thermal receipt printing ----
+   The receipt (58mm roll) is normally hidden. On print we hide the whole app
+   and show only the receipt, sized for the paper width. */
+.receipt-print { display: none; }
+
+@media print {
+  body * { visibility: hidden; }
+  .receipt-print, .receipt-print * { visibility: visible; }
+  .receipt-print {
+    display: block;
+    position: absolute;
+    left: 0; top: 0;
+    width: 58mm;
+    padding: 2mm;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: #000;
+  }
+  @page { size: 58mm auto; margin: 0; }
+}
