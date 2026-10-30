@@ -1,7 +1,10 @@
 import toast from "react-hot-toast";
 
 // Tiny fetch wrapper that attaches the JWT and parses JSON.
-const BASE = process.env.REACT_APP_API || 'http://localhost:5000/api';
+const BASE = process.env.REACT_APP_API
+  || (process.env.NODE_ENV === 'production'
+    ? 'https://crustandbeyond.divinex.tech/api'
+    : 'http://localhost:5000/api');
 
 export function getToken() {
   return localStorage.getItem('pos_token');
